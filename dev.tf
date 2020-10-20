@@ -19,7 +19,7 @@ resource "azurerm_network_interface" "dev_nic" {
     name                          = "${var.env_prefix}devvm-ipconfig"
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.dev_ip.id
+    public_ip_address_id          = azurerm_public_ip.dev_ip[0].id
   }
 }
 

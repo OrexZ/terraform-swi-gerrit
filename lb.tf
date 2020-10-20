@@ -18,7 +18,7 @@ resource "azurerm_lb_probe" "lb_public_probe_http" {
   count               = (var.is_public ? 1 : 0 ) * (var.load_balancer ? 1 : 0)
   name                = "${var.env_prefix}loadbalancer-probe-http"
   resource_group_name = var.resource_group
-  loadbalancer_id     = azurerm_lb.lb_public.id
+  loadbalancer_id     = azurerm_lb.lb_public[0].id
   port                = 80
 }
 
@@ -26,13 +26,13 @@ resource "azurerm_lb_backend_address_pool" "lb_public_backend" {
   count               = (var.is_public ? 1 : 0 ) * (var.load_balancer ? 1 : 0)
   name                = "${var.env_prefix}loadbalancer-backend"
   resource_group_name = var.resource_group
-  loadbalancer_id     = azurerm_lb.lb_public.id
+  loadbalancer_id     = azurerm_lb.lb_public[0].id
 }
 
 resource "azurerm_lb_rule" "lb_public_http" {
   count                          = (var.is_public ? 1 : 0 ) * (var.load_balancer ? 1 : 0)
   resource_group_name            = var.resource_group
-  loadbalancer_id                = azurerm_lb.lb_public.id
+  loadbalancer_id                = azurerm_lb.lb_public[0].id
   name                           = "${var.env_prefix}loadbalancer-rule-http"
   probe_id                       = azurerm_lb_probe.lb_public_probe_http.id
   frontend_ip_configuration_name = "${var.env_prefix}mainip"
@@ -45,7 +45,7 @@ resource "azurerm_lb_rule" "lb_public_http" {
 resource "azurerm_lb_rule" "lb_public_https" {
   count                          = (var.is_public ? 1 : 0 ) * (var.load_balancer ? 1 : 0)
   resource_group_name            = var.resource_group
-  loadbalancer_id                = azurerm_lb.lb_public.id
+  loadbalancer_id                = azurerm_lb.lb_public[0].id
   name                           = "${var.env_prefix}loadbalancer-rule-https"
   probe_id                       = azurerm_lb_probe.lb_public_probe_http.id
   frontend_ip_configuration_name = "${var.env_prefix}mainip"
@@ -59,7 +59,7 @@ resource "azurerm_lb_rule" "lb_public_https" {
 resource "azurerm_lb_rule" "lb_public_ssh" {
   count                          = (var.is_public ? 1 : 0 ) * (var.load_balancer ? 1 : 0)
   resource_group_name            = var.resource_group
-  loadbalancer_id                = azurerm_lb.lb_public.id
+  loadbalancer_id                = azurerm_lb.lb_public[0].id
   name                           = "${var.env_prefix}loadbalancer-rule-ssh"
   probe_id                       = azurerm_lb_probe.lb_public_probe_http.id
   frontend_ip_configuration_name = "${var.env_prefix}mainip"
@@ -88,7 +88,7 @@ resource "azurerm_lb_probe" "lb_private_probe_http" {
   count               = (1 - (var.is_public ? 1 : 0)) * (var.load_balancer ? 1 : 0)
   name                = "${var.env_prefix}loadbalancer-probe-http"
   resource_group_name = var.resource_group
-  loadbalancer_id     = azurerm_lb.lb_private.id
+  loadbalancer_id     = azurerm_lb.lb_private[0].id
   port                = 80
 }
 
@@ -96,13 +96,13 @@ resource "azurerm_lb_backend_address_pool" "lb_private_backend" {
   count               = (1 - (var.is_public ? 1 : 0)) * (var.load_balancer ? 1 : 0)
   name                = "${var.env_prefix}loadbalancer-backend"
   resource_group_name = var.resource_group
-  loadbalancer_id     = azurerm_lb.lb_private.id
+  loadbalancer_id     = azurerm_lb.lb_private[0].id
 }
 
 resource "azurerm_lb_rule" "lb_private_http" {
   count                          = (1 - (var.is_public ? 1 : 0)) * (var.load_balancer ? 1 : 0)
   resource_group_name            = var.resource_group
-  loadbalancer_id                = azurerm_lb.lb_private.id
+  loadbalancer_id                = azurerm_lb.lb_private[0].id
   name                           = "${var.env_prefix}loadbalancer-rule-http"
   probe_id                       = azurerm_lb_probe.lb_private_probe_http.id
   frontend_ip_configuration_name = "${var.env_prefix}mainip"
@@ -115,7 +115,7 @@ resource "azurerm_lb_rule" "lb_private_http" {
 resource "azurerm_lb_rule" "lb_private_https" {
   count                          = (1 - (var.is_public ? 1 : 0)) * (var.load_balancer ? 1 : 0)
   resource_group_name            = var.resource_group
-  loadbalancer_id                = azurerm_lb.lb_private.id
+  loadbalancer_id                = azurerm_lb.lb_private[0].id
   name                           = "${var.env_prefix}loadbalancer-rule-https"
   probe_id                       = azurerm_lb_probe.lb_private_probe_http.id
   frontend_ip_configuration_name = "${var.env_prefix}mainip"
@@ -128,7 +128,7 @@ resource "azurerm_lb_rule" "lb_private_https" {
 resource "azurerm_lb_rule" "lb_private_ssh" {
   count                          = (1 - (var.is_public ? 1 : 0)) * (var.load_balancer ? 1 : 0)
   resource_group_name            = var.resource_group
-  loadbalancer_id                = azurerm_lb.lb_private.id
+  loadbalancer_id                = azurerm_lb.lb_private[0].id
   name                           = "${var.env_prefix}loadbalancer-rule-ssh"
   probe_id                       = azurerm_lb_probe.lb_private_probe_http.id
   frontend_ip_configuration_name = "${var.env_prefix}mainip"
