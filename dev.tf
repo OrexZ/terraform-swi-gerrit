@@ -17,7 +17,7 @@ resource "azurerm_network_interface" "dev_nic" {
 
   ip_configuration {
     name                          = "${var.env_prefix}devvm-ipconfig"
-    subnet_id                     = var.subnet_id
+    subnet_id                     = var.subnet_id["westus2"]
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.dev_ip[0].id
   }
