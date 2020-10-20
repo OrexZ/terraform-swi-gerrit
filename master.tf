@@ -34,7 +34,7 @@ resource "azurerm_network_interface" "master_nic" {
 
   ip_configuration {
     name                          = "${var.env_prefix}master${count.index}-ipconfig"
-    subnet_id                     = var.subnet_id["westeurope"]
+    subnet_id                     = var.subnet_id["westus2"]
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id = var.load_balancer ? "" : (var.is_public ? azurerm_public_ip.public_ip[count.index].id : "")
   }

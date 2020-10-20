@@ -119,7 +119,7 @@ variable "subnet" {
 variable "subnet_id" {
   type        = map(string)
   default     = {
-    "westeurope" = "/subscriptions/xxxx/resourceGroups/xxxx/providers/Microsoft.Network/virtualNetworks/xxx/subnets/gerrit-subnet"
+    #"westeurope" = "/subscriptions/xxxx/resourceGroups/xxxx/providers/Microsoft.Network/virtualNetworks/xxx/subnets/gerrit-subnet"
     "westus2"    = "/subscriptions/xxxx/resourceGroups/xxxx/providers/Microsoft.Network/virtualNetworks/xxx/subnets/gerrit-subnet"
   }
 }
