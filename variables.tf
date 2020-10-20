@@ -32,7 +32,7 @@ variable "master_nb" {
 
 variable "dev_vm" {
   description = "Provide a dev VM that gives access to the internal network"
-  default = false
+  default = 0
 }
 
 variable "config_url" {
