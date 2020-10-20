@@ -144,7 +144,7 @@ resource "null_resource" "master_config_update" {
   connection {
     type = "ssh"
     user = "core"
-    host = azurerm_public_ip.public_ip.ip_address
+    host = azurerm_public_ip.public_ip[0].ip_address
     private_key = file("~/.ssh/id_rsa")
   }
 

@@ -135,7 +135,7 @@ resource "azurerm_virtual_machine" "mirror" {
 resource "null_resource" "mirror_config_update" {
   count                 = length(var.mirror_distribution)
 
-  triggers {
+  triggers = {
     template_rendered = data.template_file.mirror_config.rendered
   }
 
@@ -237,7 +237,7 @@ resource "azurerm_network_security_rule" "mirror_nsg_git_sync_ssh" {
   protocol                      = "Tcp"
   source_port_range             = "*"
   destination_port_range        = "22022"
-  source_address_prefix         = azurerm_public_ip.public_ip.ip_address
+  source_address_prefix         = azurerm_public_ip.public_ip[0].ip_address
   destination_address_prefix    = "*"
   resource_group_name           = var.resource_group
   network_security_group_name   = azurerm_network_security_group.mirror_nsg.*.name[count.index]

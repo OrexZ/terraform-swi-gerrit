@@ -10,7 +10,7 @@ resource "azurerm_lb" "lb_public" {
 
   frontend_ip_configuration {
     name                 = "${var.env_prefix}mainip"
-    public_ip_address_id = azurerm_public_ip.public_ip.id
+    public_ip_address_id = azurerm_public_ip.public_ip[0].id
   }
 }
 
@@ -80,7 +80,7 @@ resource "azurerm_lb" "lb_private" {
 
   frontend_ip_configuration {
     name                 = "${var.env_prefix}mainip"
-    subnet_id            = var.subnet_id
+    subnet_id            = var.subnet_id["westus2"]
   }
 }
 

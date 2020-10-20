@@ -88,6 +88,10 @@ variable "mirror_ip_domains" {
   default = []
 }
 
+variable "mirror_nb" {
+  default = 1
+}
+
 variable "master_platform_update_domain_count" {
   default = "5"
 }

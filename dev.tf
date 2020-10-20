@@ -5,7 +5,8 @@ resource "azurerm_public_ip" "dev_ip" {
   name                         = "${var.env_prefix}devvm-ip"
   location                     = var.location
   resource_group_name          = var.resource_group
-  public_ip_address_allocation = "dynamic"
+  #public_ip_address_allocation = "dynamic"
+  allocation_method            = "Dynamic"
 }
 
 resource "azurerm_network_interface" "dev_nic" {
