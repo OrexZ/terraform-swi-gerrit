@@ -37,7 +37,7 @@ variable "dev_vm" {
 
 variable "config_url" {
   description = "Repository URL for this git module"
-  default = "https://github.com/swi-infra/terraform-swi-gerrit.git"
+  default = "https://github.com/OrexZ/terraform-swi-gerrit.git"
 }
 
 variable "is_public" {
