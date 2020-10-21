@@ -7,7 +7,8 @@ variable "env_prefix" {
 
 variable "master_vm_size" {
   description = "VM Size"
-  default = "Standard_DS2_v2"
+  #default = "Standard_DS2_v2"
+  default = "Standard_DS3_v2"
 }
 
 variable "mirror_vm_size" {
