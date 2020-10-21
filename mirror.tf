@@ -177,7 +177,8 @@ resource "azurerm_network_security_rule" "mirror_nsg_ssh" {
   protocol                      = "Tcp"
   source_port_range             = "*"
   destination_port_range        = "22"
-  source_address_prefixes       = values(var.ssh_vm_address_prefix)
+  source_address_prefix         = "*"
+  #source_address_prefixes       = values(var.ssh_vm_address_prefix)
   destination_address_prefix    = "*"
   resource_group_name           = var.resource_group
   network_security_group_name   = azurerm_network_security_group.mirror_nsg.*.name[count.index]
