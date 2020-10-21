@@ -132,32 +132,32 @@ resource "azurerm_virtual_machine" "mirror" {
   }
 }
 
-resource "null_resource" "mirror_config_update" {
-  count                 = length(var.mirror_distribution)
-
-  triggers = {
-    template_rendered = data.template_file.mirror_config.rendered
-  }
-
-  connection {
-    type = "ssh"
-    user = "core"
-    host = azurerm_public_ip.mirror_public_ip.*.ip_address[count.index]
-    private_key = file("~/.ssh/id_rsa")
-  }
-
-  provisioner "file" {
-    content     = data.template_file.mirror_config.rendered
-    destination = "/tmp/CustomData"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo diff /tmp/CustomData /var/lib/waagent/CustomData | tee /tmp/CustomData-diff",
-      "sudo cp /tmp/CustomData /var/lib/waagent/CustomData"
-    ]
-  }
-}
+# resource "null_resource" "mirror_config_update" {
+#   count                 = length(var.mirror_distribution)
+#
+#   triggers = {
+#     template_rendered = data.template_file.mirror_config.rendered
+#   }
+#
+#   connection {
+#     type = "ssh"
+#     user = "core"
+#     host = azurerm_public_ip.mirror_public_ip.*.ip_address[count.index]
+#     private_key = file("~/.ssh/id_rsa")
+#   }
+#
+#   provisioner "file" {
+#     content     = data.template_file.mirror_config.rendered
+#     destination = "/tmp/CustomData"
+#   }
+#
+#   provisioner "remote-exec" {
+#     inline = [
+#       "sudo diff /tmp/CustomData /var/lib/waagent/CustomData | tee /tmp/CustomData-diff",
+#       "sudo cp /tmp/CustomData /var/lib/waagent/CustomData"
+#     ]
+#   }
+# }
 
 # Firewall
 
