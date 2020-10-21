@@ -85,6 +85,13 @@ resource "azurerm_virtual_machine" "mirror" {
   availability_set_id   = azurerm_availability_set.mirror_availability_set[count.index].id
   delete_os_disk_on_termination = true
 
+  boot_diagnostics {
+    enabled     = "true"
+    storage_uri = "https://rollingextgerrit.blob.core.windows.net"
+    #storage_uri =  "https://cs110032000e56c4e45.blob.core.windows.net"
+    #storage_uri = azurerm_storage_account.sa.primary_blob_endpoint
+  }
+
   storage_image_reference {
     publisher = var.image_publisher
     offer     = var.image_offer
