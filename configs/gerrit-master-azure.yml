@@ -33,7 +33,7 @@ coreos:
         TimeoutStartSec=0
         TimeoutStopSec=15
     - name: data-storage.service
-      #command: start
+      command: start
       content: |
         [Unit]
         Description=Local storage
