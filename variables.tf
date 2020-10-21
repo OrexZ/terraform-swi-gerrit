@@ -153,7 +153,8 @@ variable "image_sku" {
 
 variable "image_version" {
   description = "version of the image to apply (az vm image list)"
-  default     = "latest"
+  #default     = "latest"
+  default     = "2512.5.0"
 }
 
 variable "admin_username" {
